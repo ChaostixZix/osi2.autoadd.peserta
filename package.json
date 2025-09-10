@@ -1,0 +1,52 @@
+{
+  "name": "certificate-sharing",
+  "version": "1.0.0",
+  "description": "Script otomatis untuk berbagi akses sertifikat di Google Drive",
+  "main": "unified-monitor.js",
+  "bin": {
+    "certificate-monitor": "./unified-monitor.js"
+  },
+  "scripts": {
+    "start": "node unified-monitor.js",
+    "monitor": "node unified-monitor.js",
+    "dev": "node unified-monitor.js",
+    "clean:exe": "rm -f build/*.exe build.exe || true; mkdir -p build",
+    "build:win": "npm run clean:exe && pkg unified-monitor.js --targets node18-win-x64 --output build/certificate-monitor-win.exe && pkg index.js --targets node18-win-x64 --output build/certificate-sharing-win.exe && pkg map-folders.js --targets node18-win-x64 --output build/map-folders-win.exe"
+  },
+  "keywords": [
+    "google-drive",
+    "google-sheets",
+    "certificate",
+    "automation",
+    "cli"
+  ],
+  "author": "Freelance Script",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "conf": "^10.2.0",
+    "figlet": "^1.7.0",
+    "googleapis": "^128.0.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "bytenode": "^1.5.7",
+    "javascript-obfuscator": "^4.1.1",
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": "index.js",
+    "assets": [
+      "node_modules/googleapis/build/**/*",
+      "node_modules/figlet/fonts/**/*"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ]
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
