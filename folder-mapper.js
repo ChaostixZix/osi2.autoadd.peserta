@@ -15,7 +15,7 @@ async function authenticate() {
   return auth.getClient();
 }
 
-async function scanParentFolder(auth, parentFolderId, maxDepth = 2) {
+async function scanParentFolder(auth, parentFolderId, maxDepth = 3) {
   const drive = google.drive({ version: 'v3', auth });
   const folderMapping = {};
   

@@ -53,22 +53,22 @@ function findWorkerBinary() {
     const execBase = path.basename(process.execPath);
     const candidates = [];
     
-    // Try replacing 'monitor' with 'sharing' in current binary name
+    // Try replacing 'monitor' with 'worker' in current binary name
     if (execBase.toLowerCase().includes('monitor')) {
-      candidates.push(path.join(execDir, execBase.replace(/monitor/gi, 'sharing')));
+      candidates.push(path.join(execDir, execBase.replace(/monitor/gi, 'worker')));
     }
-    
+
     // Common names per platform
     const platform = process.platform;
     const ext = platform === 'win32' ? '.exe' : '';
     candidates.push(
-      path.join(execDir, `certificate-sharing${ext}`),
-      path.join(execDir, `certificate-sharing-win${ext}`),
-      path.join(execDir, `certificate-sharing-mac${ext}`),
-      path.join(process.cwd(), `certificate-sharing${ext}`),
-      path.join(process.cwd(), `certificate-sharing-win${ext}`),
-      path.join(process.cwd(), `certificate-sharing-mac${ext}`),
-      path.join(process.cwd(), 'index.js'),
+      path.join(execDir, `certificate-worker${ext}`),
+      path.join(execDir, `certificate-worker-win${ext}`),
+      path.join(execDir, `certificate-worker-mac${ext}`),
+      path.join(process.cwd(), `certificate-worker${ext}`),
+      path.join(process.cwd(), `certificate-worker-win${ext}`),
+      path.join(process.cwd(), `certificate-worker-mac${ext}`),
+      path.join(process.cwd(), 'certificate-worker.js'),
     );
 
     for (const candidate of candidates) {
@@ -414,7 +414,7 @@ async function startBasicMonitor() {
   const workerBinary = findWorkerBinary();
   if (!workerBinary) {
     console.log(chalk.red('❌ Worker binary tidak ditemukan!'));
-    console.log(chalk.yellow('   Pastikan certificate-sharing executable ada di direktori yang sama.'));
+    console.log(chalk.yellow('   Pastikan certificate-worker executable ada di direktori yang sama.'));
     process.exit(1);
   }
 

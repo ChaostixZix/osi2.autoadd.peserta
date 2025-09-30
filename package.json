@@ -2,16 +2,18 @@
   "name": "certificate-sharing",
   "version": "1.0.0",
   "description": "Script otomatis untuk berbagi akses sertifikat di Google Drive",
-  "main": "unified-monitor.js",
+  "main": "certificate-monitor.js",
   "bin": {
-    "certificate-monitor": "./unified-monitor.js"
+    "certificate-monitor": "./certificate-monitor.js"
   },
   "scripts": {
-    "start": "node unified-monitor.js",
-    "monitor": "node unified-monitor.js",
-    "dev": "node unified-monitor.js",
+    "start": "node certificate-monitor.js",
+    "monitor": "node certificate-monitor.js",
+    "dev": "node certificate-monitor.js",
+    "worker": "node certificate-worker.js",
+    "mapper": "node folder-mapper.js",
     "clean:exe": "rm -f build/*.exe build.exe || true; mkdir -p build",
-    "build:win": "npm run clean:exe && pkg unified-monitor.js --targets node18-win-x64 --output build/certificate-monitor-win.exe && pkg index.js --targets node18-win-x64 --output build/certificate-sharing-win.exe && pkg map-folders.js --targets node18-win-x64 --output build/map-folders-win.exe"
+    "build:win": "npm run clean:exe && pkg certificate-monitor.js --targets node18-win-x64 --output build/certificate-monitor-win.exe && pkg certificate-worker.js --targets node18-win-x64 --output build/certificate-worker-win.exe && pkg folder-mapper.js --targets node18-win-x64 --output build/folder-mapper-win.exe"
   },
   "keywords": [
     "google-drive",
@@ -37,7 +39,7 @@
     "pkg": "^5.8.1"
   },
   "pkg": {
-    "scripts": "index.js",
+    "scripts": "certificate-worker.js",
     "assets": [
       "node_modules/googleapis/build/**/*",
       "node_modules/figlet/fonts/**/*"
